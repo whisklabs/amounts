@@ -1,0 +1,91 @@
+{
+  "name": "@whisklabs/amounts",
+  "version": "1.0.0-0",
+  "description": "Whisk formatter library for amounts",
+  "license": "MIT",
+  "author": {
+    "name": "Whisk",
+    "url": "https://developers.whisk.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/whisklabs/amounts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/whisklabs/amounts/issues"
+  },
+  "homepage": "https://github.com/whisklabs/amounts#readme",
+  "keywords": [
+    "whisk",
+    "formatter",
+    "amounts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "check-types:watch": "npm run check-types -- --watch",
+    "build:cjs": "tsc",
+    "build:esm": "tsc --module es2015 --outDir ./dist/esm/",
+    "build:types": "tsc --outDir ./dist/types/ --declaration --emitDeclarationOnly",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types",
+    "lint:prettier": "prettier --write \"**/*.{ts,tsx,js,json,css,md,html,yml}\"",
+    "lint:fix": "npm run eslint:fix && npm run lint:prettier",
+    "eslint": "eslint '**/*.{js,ts,tsx}'",
+    "eslint:fix": "npm run eslint -- --fix",
+    "lint": "npm run eslint",
+    "release": "simple-release"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,json,md,html,yml}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run check-types",
+      "pre-push": "package-lock-check && npm run lint",
+      "commit-msg": "simple-release-lint"
+    }
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "useTabs": false
+  },
+  "dependencies": {
+    "@whisklabs/typeguards": "~1.0.0"
+  },
+  "devDependencies": {
+    "@askuzminov/simple-release": "~1.0.8",
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
+    "@typescript-eslint/parser": "^4.9.1",
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^30.7.8",
+    "eslint-plugin-prefer-arrow": "^1.2.2",
+    "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-unicorn": "^23.0.0",
+    "husky": "^4.3.5",
+    "lint-staged": "^10.5.3",
+    "package-lock-check": "^1.1.0",
+    "prettier": "^2.2.1",
+    "prettier-eslint": "^12.0.0",
+    "typescript": "^4.1.2"
+  }
+}
