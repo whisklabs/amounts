@@ -46,7 +46,6 @@ jobs:
         run: |
           npm run check-types
           npm run lint
-          npm run test
       - name: Build
         run: npm run build
       - name: Release GITHUB
